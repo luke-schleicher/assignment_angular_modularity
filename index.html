@@ -16,13 +16,15 @@
         <div class="col-xs-12">
 
           <form class="form-group">
-          <select>
-            <option ng-repeat="breed in breeds" value="breed.id" ng-model="newPuppy">{{breed.name}}</option>
-          </select>
+            <input type="text" ng-model="newPuppy.name" class="form-control">
+            <select class="form-control" ng-model="newPuppy.breed_id">
+              <option ng-repeat="breed in breeds" value="{{ breed.id }}">{{breed.name}}</option>
+            </select>
+            <button class="btn btn-primary" ng-click="createPuppy(newPuppy)">Abandon puppy...</button>
           </form>
 
           <ul>
-            <li ng-repeat="puppy in puppies"><b>{{ puppy.name }}</b> ({{ puppy.breed.name }}), created on {{ puppy.created_at | date }} -- <a ng-click="adoptPuppy(puppy.id)">Adopt Puppy</a></li>
+            <li ng-repeat="puppy in puppies"><b>{{ puppy.name }}</b> ({{ returnBreed(puppy.breed_id) || puppy.breed.name }}), created on {{ puppy.created_at | date }} -- <a ng-click="adoptPuppy(puppy.id)">Adopt Puppy</a></li>
           </ul>
 
         </div>

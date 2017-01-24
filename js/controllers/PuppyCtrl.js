@@ -1,5 +1,5 @@
-pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService",
-  function($scope, PuppiesService, BreedsService) {
+pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService", "$http",
+  function($scope, PuppiesService, BreedsService, $http) {
 
     BreedsService.getBreeds()
     .then(function(response) {
@@ -9,10 +9,19 @@ pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService",
     PuppiesService.getPuppies()
     .then(function(response) {
       $scope.puppies = response.data;
-      console.log($scope.puppies);
     });
 
+    $scope.createPuppy = function(puppy) {
+      PuppiesService.createPuppy(puppy);
+    }
 
+    $scope.returnBreed = function(id) {
+      for (var i = 0; i < $scope.breeds.length; i++) {
+        if ( $scope.breeds[i].id === id ) {
+          return $scope.breeds[i].name;
+        }
+      }
+    }
 
   }]
 );

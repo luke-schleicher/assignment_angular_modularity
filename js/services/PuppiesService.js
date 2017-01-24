@@ -5,8 +5,8 @@ pupGrade.factory("PuppiesService", ["$http", function($http) {
   obj.getPuppies = function() {
     return $http.get("https://ajax-puppies.herokuapp.com/puppies.json")
       .success(function(data, status, headers, config) {
-        obj.data = data;
-        return obj.data;
+        obj.puppies = data;
+        return obj.puppies;
       })
   };
 
@@ -14,7 +14,10 @@ pupGrade.factory("PuppiesService", ["$http", function($http) {
     var newPuppy = {};
     newPuppy.name = puppy.name;
     newPuppy.breed_id = puppy.breed_id;
-    $http.post("https://ajax-puppies.herokuapp.com/puppies.json");
+    return $http.post("https://ajax-puppies.herokuapp.com/puppies.json", newPuppy).success(function(data) {
+      obj.puppies.push(data)
+      return data;
+    })
   }
 
     return obj;
