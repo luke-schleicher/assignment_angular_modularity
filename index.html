@@ -23,8 +23,13 @@
             <button class="btn btn-primary" ng-click="createPuppy(newPuppy)">Abandon puppy...</button>
           </form>
 
+          <select ng-model="dogOrder">
+            <option value="name">Name</option>
+            <option value="breed">Breed</option>
+          </select>
+          <input type="checkbox" ng-model="reverseOrder">
           <ul>
-            <puppy ng-repeat="puppy in puppies" puppy="puppy" adopt-puppy="adoptPuppy(puppy.id)" return-breed="returnBreed(puppy.breed_id)"></puppy>
+            <puppy ng-repeat="puppy in puppies | orderBy : dogOrder : reverseOrder" puppy="puppy" adopt-puppy="adoptPuppy(puppy.id)" return-breed="returnBreed(puppy.breed_id)"></puppy>
           </ul>
 
         </div>
