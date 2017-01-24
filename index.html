@@ -24,7 +24,7 @@
           </form>
 
           <ul>
-            <li ng-repeat="puppy in puppies"><b>{{ puppy.name }}</b> ({{ returnBreed(puppy.breed_id) || puppy.breed.name }}), created on {{ puppy.created_at | date }} -- <a ng-click="adoptPuppy(puppy.id)">Adopt Puppy</a></li>
+            <puppy ng-repeat="puppy in puppies" puppy="puppy" adopt-puppy="adoptPuppy(puppy.id)" return-breed="returnBreed(puppy.breed_id)"></puppy>
           </ul>
 
         </div>
@@ -35,6 +35,7 @@
     <script src="js/services/PuppiesService.js" charset="utf-8"></script>
     <script src="js/services/BreedsService.js" charset="utf-8"></script>
     <script src="js/controllers/PuppyCtrl.js" charset="utf-8"></script>
+    <script src="js/directives/puppy.js"></script>
 
   </body>
 </html>

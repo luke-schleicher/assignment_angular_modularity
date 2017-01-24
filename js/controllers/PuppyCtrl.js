@@ -1,19 +1,25 @@
 pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService", "$interval",
   function($scope, PuppiesService, BreedsService, $interval) {
+
     BreedsService.getBreeds()
     .then(function(response) {
       $scope.breeds = response.data;
     });
 
+    $scope._getPuppies = function() {
+      PuppiesService.getPuppies()
+        .then(function(response) {
+          $scope.puppies = response.data;
+        });
+    };
 
-    $interval( function(){
-    PuppiesService.getPuppies()
-    .then(function(response) {
-      $scope.puppies = response.data;
-    });}, 2000)
+    $scope._getPuppies();
+
+    $interval($scope._getPuppies, 5000)
 
     $scope.createPuppy = function(puppy) {
       PuppiesService.createPuppy(puppy);
+      $scope.newPuppy = {};
     }
 
     $scope.returnBreed = function(id) {

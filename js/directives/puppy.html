@@ -1,0 +1,6 @@
+<li>
+  <b>{{ puppy.name }}</b> 
+  ({{ returnBreed({ id: puppy.breed_id }) || puppy.breed.name }}), 
+  created on {{ puppy.created_at | date }} -- 
+  <a ng-click="adoptPuppy({id: puppy.id })">Adopt Puppy</a>
+</li>
