@@ -14,11 +14,17 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-12">
+
           <form class="form-group">
           <select>
             <option ng-repeat="breed in breeds" value="breed.id" ng-model="newPuppy">{{breed.name}}</option>
           </select>
           </form>
+
+          <ul>
+            <li ng-repeat="puppy in puppies"><b>{{ puppy.name }}</b> ({{ puppy.breed.name }}), created on {{ puppy.created_at | date }} -- <a ng-click="adoptPuppy(puppy.id)">Adopt Puppy</a></li>
+          </ul>
+
         </div>
       </div>
     </div>
