@@ -17,11 +17,16 @@
 
           <form class="form-group">
             <input type="text" ng-model="newPuppy.name" class="form-control">
-            <select class="form-control" ng-model="newPuppy.breed_id">
+            <input type="text" ng-model="newPuppy.breed" class="form-control" ng-keydown="autocomplete(newPuppy.breed)">
+            <!-- <select class="form-control" ng-model="newPuppy.breed_id">
               <option ng-repeat="breed in breeds" value="{{ breed.id }}">{{breed.name}}</option>
-            </select>
+            </select> -->
             <button class="btn btn-primary" ng-click="createPuppy(newPuppy)">Abandon puppy...</button>
           </form>
+
+          <div ng-repeat="suggestions in autocompletedSuggestions">
+            {{suggestions}}
+          </div>
 
           <select ng-model="dogOrder">
             <option value="name">Name</option>

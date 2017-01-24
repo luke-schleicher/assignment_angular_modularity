@@ -34,5 +34,14 @@ pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService", "
       PuppiesService.adoptPuppy(id)
     }
 
+    $scope.autocomplete = function(breed) {
+      $scope.autocompletedSuggestions = [];
+      for (var i = 0; i < $scope.breeds.length; i++) {
+        if ($scope.breeds[i].name.search(breed) !== -1) {
+          $scope.autocompletedSuggestions.push($scope.breeds[i].name)
+        }
+      }
+    }
+
   }]
 );
