@@ -18,8 +18,17 @@ pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService", "
     $interval($scope._getPuppies, 5000)
 
     $scope.createPuppy = function(puppy) {
+      puppy.breed_id = $scope.checkforId(puppy)
       PuppiesService.createPuppy(puppy);
       $scope.newPuppy = {};
+    }
+
+    $scope.checkforId = function(puppy){
+      for (var i = 0; i < $scope.breeds.length; i++) {
+        if ( $scope.breeds[i].name === puppy.name ) {
+          return $scope.breeds[i].id
+        }
+      }
     }
 
     $scope.returnBreed = function(id) {
@@ -36,11 +45,19 @@ pupGrade.controller("PuppyCtrl", ["$scope", "PuppiesService", "BreedsService", "
 
     $scope.autocomplete = function(breed) {
       $scope.autocompletedSuggestions = [];
+      if(!breed){
+        return false
+      }
       for (var i = 0; i < $scope.breeds.length; i++) {
-        if ($scope.breeds[i].name.search(breed) !== -1) {
-          $scope.autocompletedSuggestions.push($scope.breeds[i].name)
+        if ($scope.breeds[i].name.search(new RegExp(breed, ["i"])) !== -1) {
+          $scope.autocompletedSuggestions.push($scope.breeds[i])
         }
       }
+    }
+
+    $scope.fillInInput = function(id){
+      $scope.newPuppy.breed_id = id
+      $scope.newPuppy.breed = $scope.returnBreed(id)
     }
 
   }]
